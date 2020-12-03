@@ -73,7 +73,6 @@ UFPR05_rainy = read_dataset_dir("UFPR05", "Rainy", bigger_w, bigger_h, NEW_DATA_
 
 info_list = puc_sunny + puc_cloudy + puc_rainy + UFPR04_cloudy + UFPR04_sunny + UFPR04_rainy + UFPR05_cloudy + UFPR05_sunny + UFPR05_rainy
 
-info_list = puc_cloudy
 
 df = pd.DataFrame(data=info_list, columns=["relative_path", "parkinglot_name",	"date",	"weather", "status"])
 
