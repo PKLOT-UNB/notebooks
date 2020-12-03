@@ -3,6 +3,7 @@ import ipyplot
 import numpy as np
 import pandas as pd
 import cv2
+import imutils
 DATA_PATH = "/home/delll/fga/veiculos_autonomos/datasets/PKLot/PKLotSegmented"
 NEW_DATA_PATH = "/home/delll/fga/veiculos_autonomos/datasets/PKLot/ready2go/"
 
@@ -22,7 +23,10 @@ def pad_image(img, bigger_w, bigger_h):
         padding_top = int(padding_top)
 
     result = np.ones([bigger_w, bigger_h, 3])
-    result[padding_sides: padding_sides+img.shape[0], padding_top: padding_top + img.shape[1]] = img
+    try:
+        result[padding_sides: padding_sides+img.shape[0], padding_top: padding_top + img.shape[1]] = np.array(img)
+    except:
+        return []
     return result
 
 
@@ -44,7 +48,15 @@ def read_dataset_dir(parkinglot_name, weather, bigger_w, bigger_h, new_images_pa
 
                 img = cv2.imread(file_path)
                 # make padding and save image
-                new_img = pad_image(img, bigger_w, bigger_h)  
+                pw, ph = img.shape[0]/176, img.shape[1]/93
+                n_max_size = (110, 58)
+                if (pw > ph):
+                    img = imutils.resize(img, width=110)
+                elif (ph >= pw):
+                    img = imutils.resize(img, height=58)
+                new_img = pad_image(img, n_max_size[0], n_max_size[1])
+                if new_img == []:
+                    continue  
                 cv2.imwrite(new_file_path, new_img)
                 dir_info_list.append([ new_file_path,  parkinglot_name, date, weather,  state ])
                 
