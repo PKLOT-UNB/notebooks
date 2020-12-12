@@ -10,24 +10,25 @@ The article is presented inside the docs foldes. It also can be found in overlea
 
 ## Install
 
-* Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/PKLOT-UNB/notebooks.git
 ```
 
-*  Install dependecies 
+
+### Install dependecies 
 
 The dependencies could be installed using pip, the file with dependecies is presented in root folder, requirements.txt.
 
 
-* Donwload the PKLot Dataset
+### Donwload the PKLot Dataset
 
 The data set is available at:
 
 * https://web.inf.ufpr.br/vri/databases/parking-lot-database/
 
-* Update Paths
+### Update Paths
 
 * The paths presented in unb_autopark_preprocess.py and unb_autopark_model.py are used by us and are relative to dataset path. Please update it, to work as well. If you have any question, please open up an issue.
 
