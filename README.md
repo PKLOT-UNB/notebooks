@@ -18,6 +18,8 @@ git clone https://github.com/PKLOT-UNB/notebooks.git
 
 *  Install dependecies 
 
+The dependencies could be installed using pip, the file with dependecies is presented in root folder, requirements.txt.
+
 
 * Donwload the PKLot Dataset
 
@@ -47,6 +49,7 @@ The dataset pre-processment is defined in unb_autopark_model.py file. A detailed
 
 ### Article
 
+The article Park Slot Detection: Park Slot Detection: A DeepLearning Approach is available in overleaf but alsou could be found at the root folder.
 
 ## Authors
 
