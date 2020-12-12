@@ -14,7 +14,6 @@ X = []
 y = []
 
 for idx, element in enumerate(df.iterrows()):
-
     img = cv2.imread(element[1]['relative_path'])
 
     #normalizando as imagens, colocando em um intervalo de 0 a 1
@@ -37,7 +36,7 @@ model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(32, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Flatten())
-model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(128, activation='relu'))
 model.add(layers.Dropout(0.5))
 model.add(layers.Dense(1))
 model.add(layers.Activation('sigmoid'))
@@ -53,3 +52,4 @@ history = model.fit(X_train, y_train, epochs=10,
 
 
 
+model.save_weights("model_test.h5")
