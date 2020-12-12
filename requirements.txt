@@ -1,0 +1,9 @@
+os
+ipyplot
+numpy
+pandas
+opencv-python
+tensorflow
+matplotlib
+imutils
+ipyplot
