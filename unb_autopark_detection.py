@@ -6,7 +6,7 @@ DATA_PATH = "./2012-10-16_17_18_53.xml"
 xtree = et.parse(DATA_PATH)
 xroot = xtree.getroot() 
 
-df_cols = ["id", "occupied", "height", "width", "xCenter", "yCenter"]
+df_cols = ["id", "occupied", "width", "height", "xCenter", "yCenter", "Angle"]
 rows = []
 
 ids = []
@@ -25,6 +25,7 @@ for x in root.iter('space'):
     s_width = None
     s_xCenter = None
     s_yCenter = None
+    s_angle = None
 
     root1 = et.Element('root')
     
@@ -35,13 +36,7 @@ for x in root.iter('space'):
 
     for rect in root1.iter('rotatedRect'):
         root2 = et.Element('root')
-        # print(rect)
-
         root2 = rect
-
-        # print()
-        # s_height = rect.attrib.get("h")
-        # s_width = rect.attrib.get("w")
         
         for center in root2.iter('center'):
             root3 = et.Element('root')
@@ -51,49 +46,25 @@ for x in root.iter('space'):
         
             root3 = center
 
-        # for tech in root2.iter('size'):
-        #     root3 = et.Element('root')
-        #     print(tech)
-        #     # root3=(tech)
-        
-        # for item in root2.iter('angle'):
-        #     root3 = et.Element('root')
-        #     print(item)
-        #     root3=(item)
+        for size in root2.iter('size'):
+            root3 = et.Element('root')
 
+            s_height = size.attrib.get("h")
+            s_width = size.attrib.get("w")
+
+        for angle in root2.iter('angle'):
+            root3 = et.Element('root')
+            s_angle = angle.attrib.get("d")
+  
     rows.append({
         "id": s_id,
         "occupied": s_occupied,
         "xCenter": s_xCenter,
         "yCenter": s_yCenter,
+        "width": s_width,
         "height": s_height,
-        "width": s_width
+        "s_angle": s_angle
     })
-
-
-
-           # for yr in root3.iter('size'):
-            #     root4 = et.Element('angle')
-            #     print(yr)
-            #     root4=yr
-            #     for gas in root4.iter('Non-CO2'):
-            #         root5 = et.Element('root')
-            #         print(gas)
-            #         root5=gas
-
-# for node in xroot: 
-#     s_id = node.attrib.get("id")
-#     s_occupied = node.attrib.get("occupied")
-#     S_height = node.find("w").text 
-#     s_width = node.find("h").text
-
-#     rows.append({
-#         "id": s_id,
-#         "occupied": s_occupied,
-#         "height": S_height,
-#         "width": s_width
-#     })
-
 
 out_df = pd.DataFrame(rows, columns = df_cols)
 print(out_df)
